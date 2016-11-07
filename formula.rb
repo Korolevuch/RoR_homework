@@ -1,5 +1,5 @@
 class Formula
-
+  attr_writer :num
 
   def initialize num
     @str = String.new
@@ -8,23 +8,23 @@ class Formula
   end
 
   def add n
-   @number = @number + n
-   @str << "+ #{n} "
+   p @number = @number + n
+   @str << " + #{n} "
   end
 
   def subtract n
-   @number = @number - n
-   @str << "- #{n} "
+   p @number = @number - n
+   @str << " - #{n} "
   end
 
-  def divade n
-  @number = @number / n
-  @str << "/ #{n} "
+  def divide n
+  p @number = @number / n
+  @str << " / #{n} "
   end
 
   def myltiplay n
-   @number = @number * n
-   @str << "* #{n} "
+  p @number = @number * n
+   @str << " * #{n} "
   end
 
   def result
@@ -32,10 +32,25 @@ class Formula
   end
 
   def to_s
-    @str
+    math = %w(* /)
+    arr = @str.split
+    arr2 = @str.split
+    count = 0
+    arr2.each_with_index do |el, i|
+      if math.include?(el)
+      arr.insert(i + count, ')')
+      arr.unshift('(')
+      count += 2
+    end
+  end
+  arr.join(' ')
   end
 
   def clear_string
     @str = ''
+  end
+
+  def clear_result
+    @number = 0
   end
 end
