@@ -35,13 +35,13 @@ class Formula
     math = %w(* /)
     arr = @str.split
     arr2 = @str.split
-    count = 0
-    arr2.each_with_index do |el, i|
+    arr2.each_with_index.inject(0) do |inc, (el, i)|
       if math.include?(el)
-      arr.insert(i + count, ')')
+      arr.insert(i + inc, ')')
       arr.unshift('(')
-      count += 2
+      inc += 2
     end
+    inc
   end
   arr.join(' ')
   end
